@@ -1,0 +1,46 @@
+# اسم سير العمل الذي سيظهر في GitHub
+name: Build Android Debug APK
+
+# يتم تشغيل هذا السير تلقائيًا عند كل عملية push إلى الفرع main
+on:
+  push:
+    branches: [ "main" ]
+
+# المهام التي سيتم تنفيذها
+jobs:
+  build:
+    # نوع النظام الذي ستعمل عليه المهمة
+    runs-on: ubuntu-latest
+
+    # الخطوات التنفيذية
+    steps:
+      # 1. جلب كود المشروع من المستودع
+      - uses: actions/checkout@v4
+
+      # 2. إعداد بيئة Java (ضرورية لبناء تطبيقات أندرويد)
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # 3. إعداد بيئة Flutter (تم اختيار إصدار حديث متوافق مع مشروعك)
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.2'
+          channel: 'stable'
+          cache: true
+
+      # 4. تثبيت جميع الحزم والمكتبات الخاصة بالمشروع
+      - name: Install dependencies
+        run: flutter pub get
+
+      # 5. بناء ملف APK نسخة الـ Debug
+      - name: Build debug APK
+        run: flutter build apk --debug
+
+      # 6. رفع ملف الـ APK الناتج كـ "Artifact" لكي تتمكن من تحميله
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-apk # اسم الملف الذي سيتم رفعه
+          path: build/app/outputs/flutter-apk/app-debug.apk
