@@ -1,0 +1,59 @@
+name: invoices_pro
+description: تطبيق احترافي لإدارة الفواتير والمنتجات - Offline First
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # قاعدة البيانات المحلية
+  sqflite: ^2.3.0
+  path_provider: ^2.1.1
+  path: ^1.8.3
+  
+  # إدارة الحالة
+  provider: ^6.1.1
+  
+  # التواريخ والأرقام
+  intl: ^0.18.1
+  
+  # المشاركة والطباعة
+  share_plus: ^7.2.1
+  printing: ^5.11.1
+  pdf: ^3.10.7
+  
+  # Google Drive للنسخ الاحتياطي
+  googleapis: ^13.1.0
+  google_sign_in: ^6.1.6
+  
+  # ملفات وإذونات
+  file_picker: ^6.1.1
+  permission_handler: ^11.1.0
+  
+  # UI Components
+  flutter_slidable: ^3.0.1
+  
+  # Icons
+  cupertino_icons: ^1.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  
+  # خطوط عربية احترافية
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo-Regular.ttf
+        - asset: assets/fonts/Cairo-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Cairo-SemiBold.ttf
+          weight: 600
